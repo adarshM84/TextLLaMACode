@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Selected Text Viewer",
+  "version": "1.0",
+   "description": "Show selected text via right-click context menu.",
+  "permissions": ["contextMenus", "scripting", "activeTab"],
+  "host_permissions": ["http://*:*/*",
+    "https://*:*/*"
+],
+ "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png"
+    }
+  }
+}
+
