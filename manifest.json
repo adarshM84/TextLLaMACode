@@ -2,12 +2,18 @@
   "manifest_version": 3,
   "name": "Selected Text Viewer",
   "version": "1.0",
-   "description": "Show selected text via right-click context menu.",
-  "permissions": ["contextMenus", "scripting", "activeTab"],
-  "host_permissions": ["http://*:*/*",
+  "description": "Show selected text via right-click context menu.",
+  "permissions": [
+    "contextMenus",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://*:*/*",
     "https://*:*/*"
-],
- "background": {
+  ],
+  "background": {
     "service_worker": "background.js"
   },
   "action": {
@@ -18,4 +24,3 @@
     }
   }
 }
-
