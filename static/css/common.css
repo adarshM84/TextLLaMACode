@@ -1,11 +1,9 @@
 body {
-    background: #E3F2FD !important;
-    /* background: black !important;
-    color: white !important; */
-    scrollbar-width: none !important;
-    font-family: Arial, sans-serif;
-    height: 500px !important;
-    width: 400px !important;
+    background: #c6c9bf !important;
+    scrollbar-width: none;
+    font-family: Arial, sans-serif !important;
+    min-height: 1000px;
+    width: 550px !important;
 }
 
 #selectedText {
@@ -20,7 +18,7 @@ body {
 #showAnswer {
     margin-top: 10px;
     padding: 10px;
-    background: #e8ffe2;
+    background: #97ccd5;
     border: 1px solid #e8ffe2;
     padding: 10px;
     border-radius: 5px;
@@ -559,7 +557,7 @@ a {
 
 .svg-Me {
     cursor: pointer;
-    color: rgba(255, 165, 0, 0.85);
+    color: rgb(255 255 255 / 85%);
 }
 
 #ownerImage {

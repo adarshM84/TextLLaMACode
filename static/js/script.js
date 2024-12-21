@@ -27,7 +27,6 @@ if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.id) {
 
 function setHostAddress(hostName) {
     if (rebuildRules) {
-        console.log("======================")
         rebuildRules("localhost");
     }
     else if (hostName.length > 0) rebuildRules("localhost");;
@@ -117,7 +116,7 @@ function getQuestionAnswer(useQuestion) {
 
                     // Check if the response indicates "done: true"
                     if (jsonData.done) {
-                        var tmpBotAnswer = document.getElementById("botResponseDiv" + localStorage.getItem("qId")).textContent;
+                        console.log("Done");
                     } else {
                         // Continue reading the stream
                         readStream();

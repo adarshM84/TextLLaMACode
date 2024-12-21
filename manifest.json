@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Selected Text Viewer",
+  "name": "TextLLaMA",
   "version": "1.0",
-  "description": "Show selected text via right-click context menu.",
+  "description": "This extention will help you to explain the word in easy way with mail compose and grammer check with translation to multiple language.",
   "permissions": [
     "contextMenus",
     "declarativeNetRequest",

@@ -1,16 +1,16 @@
 let selectedText = ""; // Store the selected text globally
 let responseMessage = "";
 
-// Create the context menu when the extension is installed
-chrome.runtime.onInstalled.addListener(() => {
-  const menuItems = [
-    { id: "correctGrammar", title: "Correct Grammar" },
-    { id: "explainText", title: "Explain the Text" },
-    { id: "translateText", title: "Translate" },
-    { id: "writeEmail", title: "Write an Email" },
-    { id: "writeAutoResponse", title: "Write an Auto Response for Email" }
-  ];
+const menuItems = [
+  { id: "correctGrammar", title: "Correct Grammar" },
+  { id: "explainText", title: "Explain the Text" },
+  { id: "translateText", title: "Translate" },
+  { id: "writeEmail", title: "Write an Email" },
+  { id: "writeAutoResponse", title: "Write an Auto Response for Email" }
+];
 
+// Create a parent context menu
+chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "parentMenu",
     title: "Text Actions",
@@ -41,6 +41,7 @@ chrome.runtime.onInstalled.addListener(() => {
     { id: "translateToJapanese", title: "Japanese" },
     { id: "translateToKorean", title: "Korean" }
   ];
+
   translateLanguages.forEach((language) => {
     chrome.contextMenus.create({
       id: language.id,
@@ -49,8 +50,8 @@ chrome.runtime.onInstalled.addListener(() => {
       contexts: ["selection"]
     });
   });
-
 });
+
 
 // Listen for the context menu click
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -108,17 +109,16 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         responseMessage = "Action not recognized.";
     }
 
-    // Open the popup programmatically
-    console.log(1);
-    chrome.action.openPopup();
+    // Ensure the side panel is enabled and configured
+    chrome.sidePanel.open({ windowId: tab.windowId });
   }
 });
 
 // Provide the selected text when requested by the popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log("========== Called")
   if (request.type === "getSelectedText") {
-    console.log(2, request);
     sendResponse({ text: responseMessage });
-    responseMessage = "No Text Selected.";
+    responseMessage = "No Text Selected."; // Reset response message after sending
   }
 });
