@@ -1,29 +1,3 @@
-body {
-    background: #c6c9bf !important;
-    scrollbar-width: none;
-    font-family: Arial, sans-serif !important;
-    min-height: 1000px;
-    width: 550px !important;
-}
-
-#selectedText {
-    margin-top: 10px;
-    padding: 10px;
-    background: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    white-space: pre-wrap;
-}
-#showAnswer {
-    margin-top: 10px;
-    padding: 10px;
-    background: #97ccd5;
-    border: 1px solid #e8ffe2;
-    padding: 10px;
-    border-radius: 5px;
-    white-space: pre-wrap;
-}
 
 .chatDiv {
     height: 70vh !important;

@@ -4,11 +4,12 @@ let responseMessage = "";
 // Create the context menu when the extension is installed
 chrome.runtime.onInstalled.addListener(() => {
   const menuItems = [
-    { id: "correctGrammar", title: "Correct Grammar" },
-    { id: "explainText", title: "Explain the Text" },
-    { id: "translateText", title: "Translate" },
-    { id: "writeEmail", title: "Write an Email" },
-    { id: "writeAutoResponse", title: "Write an Auto Response for Email" }
+    { id: "correctGrammar", title: "✍️ Correct Grammar" },
+    { id: "askQuestion", title: "❓ Ask" },
+    { id: "explainText", title: "📖 Explain the Text" },
+    { id: "translateText", title: "🌐 Translate to" },
+    { id: "writeEmail", title: "📧 Write an Email" },
+    { id: "writeAutoResponse", title: "🤖 Write an Auto Response for Email" }
   ];
 
   chrome.contextMenus.create({
@@ -62,41 +63,44 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       case "correctGrammar":
         responseMessage = `Corrected grammar for: ${selectedText}`;
         break;
+      case "askQuestion":
+        responseMessage = selectedText;
+        break;
       case "explainText":
         responseMessage = `Explanation for: ${selectedText}`;
         break;
       case "translateToHindi":
-        responseMessage = `Translation of "${selectedText}" to Hindi.`;
+        responseMessage = `Translation of given text to  Hindi : "${selectedText}`;
         break;
       case "translateToEnglish":
-        responseMessage = `Translation of "${selectedText}" to English.`;
+        responseMessage = `Translation of given text to English : "${selectedText}" `;
         break;
       case "translateToSpanish":
-        responseMessage = `Translation of "${selectedText}" to Spanish.`;
+        responseMessage = `Translation of of given text  to Spanish :"${selectedText}"`;
         break;
       case "translateToFrench":
-        responseMessage = `Translation of "${selectedText}" to French.`;
+        responseMessage = `Translation of of given text  to French :"${selectedText}" `;
         break;
       case "translateToGerman":
-        responseMessage = `Translation of "${selectedText}" to German.`;
+        responseMessage = `Translation of of given text  to German :"${selectedText}"`;
         break;
       case "translateToItalian":
-        responseMessage = `Translation of "${selectedText}" to Italian.`;
+        responseMessage = `Translation of of given text  to Italian : "${selectedText}"`;
         break;
       case "translateToPortuguese":
-        responseMessage = `Translation of "${selectedText}" to Portuguese.`;
+        responseMessage = `Translation of of given text  to Portuguese : "${selectedText}"`;
         break;
       case "translateToDutch":
-        responseMessage = `Translation of "${selectedText}" to Dutch.`;
+        responseMessage = `Translation of of given text  to Dutch : "${selectedText}"`;
         break;
       case "translateToRussian":
-        responseMessage = `Translation of "${selectedText}" to Russian.`;
+        responseMessage = `Translation of of given text  to Russian :"${selectedText}"`;
         break;
       case "translateToJapanese":
-        responseMessage = `Translation of "${selectedText}" to Japanese.`;
+        responseMessage = `Translation of of given text  to Japanese : "${selectedText}".`;
         break;
       case "translateToKorean":
-        responseMessage = `Translation of "${selectedText}" to Korean.`;
+        responseMessage = `Translation of of given text  to Korean : "${selectedText}"`;
         break;
       case "writeEmail":
         responseMessage = `Suggested email for "${selectedText}".`;
@@ -109,7 +113,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     }
 
     // Open the popup programmatically
-    console.log(1);
     chrome.action.openPopup();
   }
 });
@@ -117,7 +120,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 // Provide the selected text when requested by the popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "getSelectedText") {
-    console.log(2, request);
     sendResponse({ text: responseMessage });
     responseMessage = "No Text Selected.";
   }

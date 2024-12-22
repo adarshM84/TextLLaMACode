@@ -1,7 +1,7 @@
+var botMessage = "";
 var rebuildRules = undefined;
 if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.id) {
     rebuildRules = async function (domain) {
-        console.log("data us ", domain)
         const domains = [domain];
         /** @type {chrome.declarativeNetRequest.Rule[]} */
         const rules = [{
@@ -33,13 +33,104 @@ function setHostAddress(hostName) {
 }
 
 window.onload = () => {
-    console.log(chrome.runtime.id)
-    setHostAddress();
+    initializeLocalStorageDefaults();
+    setHostAddress(localStorage.getItem("hostAddress"));//To Do a post call for chat with ollama modals
+    setModalSettingsList();
+    setFunctionCallByClass("ollamaSettings", "change", setSettings);
+
+    document.getElementById("openSettingIcon").addEventListener("click", function (event) {
+        showElement("chatDiv", !document.getElementById("ollamaSettings").hidden);
+        showElement("ownerDiv", false);
+        showElement("ollamaSettings", document.getElementById("ollamaSettings").hidden);
+        setModalSettingsList();
+    });
+    document.getElementById("opneIntroIcon").addEventListener("click", function (event) {
+        showElement("ollamaSettings", false);
+        showElement("chatDiv", !document.getElementById("ownerDiv").hidden);
+        showElement("ownerDiv", document.getElementById("ownerDiv").hidden);
+    });
+    if (localStorage.getItem("ollamaModal") && localStorage.getItem("ollamaModal") !== null && localStorage.getItem("ollamaModal").length != 0) {
+        document.getElementById("modalInfo").innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
+        <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"/>
+        <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+      </svg> `+ localStorage.getItem("ollamaModal");
+    }
+
+    if(localStorage.getItem("chatTheme"))  document.getElementById("coustomStyle").innerHTML = localStorage.getItem("chatTheme");
+
 }
 
+//This will set the function call by class name
+function setFunctionCallByClass(elementClassName, actionType, func, funcElementId = false) {
+    var tmpClassElementList = document.getElementsByClassName(elementClassName);
+    for (i = 0; i < tmpClassElementList.length; i++) {
+        tmpClassElementList[i].addEventListener(actionType, function (event) {
+            if (funcElementId) func(funcElementId)
+            else func(event)
+        });
+    }
+}
+
+//Set Settings On Changes
+function setSettings(event) {
+    // console.log(event.target.name, event.target.type)
+    if (event.target.type == "text" && event.target.id == "modalConnectionUri") {
+        if (event.target.value.trim().length == 0) {
+            alert("Please enter valid uri");
+            return;
+        }
+        localStorage.setItem("modalConnectionUri", event.target.value);
+    } else if (event.target.type == "select-one" && event.target.id == "modalList") {
+        if (event.target.value.trim().length == 0) {
+            alert("Please select modal");
+            return;
+        }
+        localStorage.setItem("ollamaModal", event.target.value);
+        document.getElementById("modalInfo").innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
+  <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"/>
+  <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+</svg> `+ localStorage.getItem("ollamaModal");
+    }
+    else if (event.target.type == "select-one" && event.target.id == "chatTheme") {
+        if (event.target.value.trim().length == 0) {
+            alert("Please select modal");
+            return;
+        }
+        localStorage.setItem("chatTheme", event.target.value);
+        document.getElementById("coustomStyle").innerHTML = event.target.value;
+    }
+    setModalSettingsList();
+}
+
+function showElement(elementId, flag) {
+    document.getElementById(elementId).hidden = !flag;
+}
+
+function initializeLocalStorageDefaults() {
+    setDefault("hostAddress", "localhost");
+    setDefault("modalConnectionUri", "http://localhost:11434");
+}
+
+//Set Localstorage value
+function setDefault(key, defaultValue, setForce = false) {
+    if (!localStorage.getItem(key) || localStorage.getItem(key).length === 0 || setForce) {
+        localStorage.setItem(key, defaultValue);
+    }
+}
+
+//To Get Answer
 function getQuestionAnswer(useQuestion) {
+    botMessage="";
+    if (localStorage.getItem("ModalWorking") != 1) {
+        alert("Not able to connect with ollama please check the settings.");
+        return;
+    }
+
+    let modalName = localStorage.getItem("ollamaModal") ? localStorage.getItem("ollamaModal") : "llama3.2:1b";
+
+    localStorage.setItem("oldQuestion", useQuestion);
     const data = {
-        model: "llama3.2:1b",
+        model: modalName,
         prompt: useQuestion,
         stream: true
     };
@@ -106,13 +197,14 @@ function getQuestionAnswer(useQuestion) {
                         console.log(jsonData.error);
                         return;
                     }
-                    console.log(jsonData, jsonData.done)
                     if (document.getElementById("showAnswer").classList.contains("process")) {
                         document.getElementById("showAnswer").classList.remove("process");
-                        document.getElementById("showAnswer").textContent="";
+                        document.getElementById("showAnswer").textContent = "";
                     }
                     jsonData.response = jsonData.response.replace(/"/g, '');
-                    document.getElementById("showAnswer").innerHTML += parseText(jsonData.response);
+                    botMessage+=jsonData.response;
+                    document.getElementById("showAnswer").innerHTML = parseText(botMessage);
+                    localStorage.setItem("oldAnswer", document.getElementById("showAnswer").innerHTML);
 
                     // Check if the response indicates "done: true"
                     if (jsonData.done) {
@@ -130,12 +222,15 @@ function getQuestionAnswer(useQuestion) {
             readStream();
         })
         .catch(error => {
+            alert("Opps!! not able to conect with ollama server.Please check settngs or ollama is runing or not.")
             console.error('There was a problem with the fetch operation:', error);
         });
 
 }
 
+//To Parse Html Content
 function parseText(input) {
+    console.log("Kyu hila dala na ??????/",input);
     // Escape any HTML in the input to prevent parsing
     const escapedInput = input
         .replace(/&/g, "&amp;") // Escape `&`
@@ -175,8 +270,87 @@ function parseText(input) {
 
     // Detect and format code blocks with triple backticks
     formatted = formatted.replace(/```(html|css|javascript|php|cpp|)(.*?)```/gs, (match, lang, code) => {
+        console.log("=====In")
         lang = lang || "general"; // Default to 'general' if no language is specified
         return wrapCodeBlock(lang, code);
     });
     return formatted;
+}
+
+//Set Modal And Load Data Of Settings
+function setModalSettingsList() {
+    loadChatTheme();
+    document.getElementById("modalConnectionUri").value = localStorage.getItem("modalConnectionUri");
+
+    var apiUrl = "http://localhost:11434";
+
+    if (localStorage.getItem("modalConnectionUri")) {
+        apiUrl = localStorage.getItem("modalConnectionUri") + "/api/tags";
+    }
+
+    fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => response.json())
+        .then((data) => {
+            var modelsList = data.models;
+            var modelSelect = document.getElementById("modalList");
+            modelSelect.innerHTML = "";
+            modelSelect.innerHTML = "<option disabled selected>Select Modal</option>";
+
+            for (i = 0; i < modelsList.length; i++) {
+                var tmpOption = document.createElement("option");
+                tmpOption.value = modelsList[i].name;
+                tmpOption.innerHTML = modelsList[i].name + " " + modelsList[i].details.parameter_size;
+
+                var selectedModal = localStorage.getItem("ollamaModal");
+
+                if (selectedModal == modelsList[i].name) {
+                    tmpOption.selected = true;
+                }
+
+                modelSelect.appendChild(tmpOption);
+            }
+            localStorage.setItem("ModalWorking", 1);
+            setMessage("settingsMessage", "");
+        })
+        .catch((error => {
+            var modelSelect = document.getElementById("modalList");
+            modelSelect.innerHTML = "";
+            setTimeout(function () { setMessage("settingsMessage", `<img class='customIcon' src='static/images/cross.gif' />Unable to connect to ollama.Please check server running or not through below url.<br><a target='_blank' href='${apiUrl}'>${apiUrl}<a><br><span class='text-success'> To install or make setup of ollama server use <a href="https://chromewebstore.google.com/detail/opentalkgpt/idknomikbgopkhpepapoehhoafacddlk">OpenTalkGpt Extention</a> </span>`, 1) }, 100);
+            localStorage.setItem("ModalWorking", 0);
+            console.error('There was a problem with the fetch operation:', error);
+            alert("Opps!! not able to conect with ollama server.Please check settngs or ollama is runing or not.")
+        }));
+
+}
+
+//To Load Theme
+function loadChatTheme() {
+    var themeSelect = document.getElementById("chatTheme");
+    themeSelect.innerHTML = "";
+    themeSelect.innerHTML = "<option disabled selected>Select Theme</option>";
+
+    for (i = 0; i < chatTheme.length; i++) {
+        var tmpOption = document.createElement("option");
+        tmpOption.value = chatTheme[i].value;
+        tmpOption.innerHTML = chatTheme[i].name;
+
+        var selectedTheme = localStorage.getItem("chatTheme");
+
+        if (selectedTheme == chatTheme[i].value) {
+            tmpOption.selected = true;
+        }
+
+        themeSelect.appendChild(tmpOption);
+    }
+}
+
+//To Show Message
+function setMessage(elemId, msg, isError) {
+    document.getElementById(elemId).innerHTML = msg;
+    var messageCss = isError ? "color:red;" : "color:green;";
+    document.getElementById(elemId).setAttribute("style", messageCss);
 }
