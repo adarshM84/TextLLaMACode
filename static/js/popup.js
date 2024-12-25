@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Request the selected text when the popup loads
   chrome.runtime.sendMessage({ type: "getSelectedText" }, (response) => {
-    console.log(response);
     const selectedTextElement = document.getElementById("selectedText");
     if (selectedTextElement && response.text) {
       selectedTextElement.textContent = response.text;

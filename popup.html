@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TextLLaMA: Your ultimate AI-powered writing assistant. Simplify content, translate languages, correct grammar, and compose professional emails.">
+  <meta name="keywords" content="TextLLaMA, AI writing assistant, content simplifier, Grammarly alternative, email assistant, grammar correction, content translation, professional email writing, AI-powered tool, language translator, AI grammar checker, writing tool, email automation, text explainer, global communication, Ollama model, email writing tool, translate text, correct grammar online, AI email responder, content enhancer, write accurate emails, free AI grammar tool, Grammarly competitor, simplify text, text explanation tool, translate languages online, open-source language model, AI for emails, writing support, professional communication tool, AI text tool, multilingual translation, automatic grammar correction, AI-powered translator, content writing tool, Grammarly-like extension, best AI for grammar, automated email replies, grammar improvement tool, email composer, content helper, grammar enhancement, accurate writing tool, free grammar correction, efficient writing extension, AI assistant for emails, global language translation, grammar and translation tool, content improvement AI, translation for messages, writing accuracy tool, explain text online, free AI text tool, AI content assistant, open-source grammar corrector, simplify emails, Grammarly for emails, explain complex content, translate content to multiple languages, AI message composer, AI for global communication, AI-based email replies, AI-powered email writer, writing accuracy enhancer, Ollama-based tool, professional grammar check, accurate language translation, free AI email tool, explain difficult text, writing productivity tool, best email assistant, multilingual text helper, AI email automation, efficient communication extension.">
+  <meta name="author" content="Adarsh Mishra">
   <title>TextLLaMA</title>
   <link rel="stylesheet" href="static/css/common.css">
   <link rel="icon" type="images/x-icon" href="icon48.png">
@@ -61,7 +64,7 @@
   <!-- navbar start -->
   <nav class="navbar sticky-top navbar-light bg-dark text-light mb-4">
     <div class="container-fluid">
-      <h4 id="headTitle" class="text-center">
+      <h4 id="headTitle" class="text-center" title="Home">
         <i style="color:rgb(255 255 255 / 85%);font-size: 1.5rem !important;">
           TextLLaMA
         </i>
@@ -83,11 +86,16 @@
               d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
           </svg>
         </span>
-        <a href="#" title="FAQ">
+        <a href="https://adarshm84.github.io/TextLLaMA/index.html" target="_blank" title="More">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
             class="mx-2 bi bi-question-circle-fill svg-Me" viewBox="0 0 16 16">
             <path
               d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247m2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+          </svg>
+        </a>
+        <a href="#" id="closeChat" title="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-circle-fill text-danger svg-Me" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
           </svg>
         </a>
       </div>
@@ -123,6 +131,9 @@
         automatically when you make any updates.</strong></p>
     <div>
       <span class="coustomMessage" id="settingsMessage"></span>
+      <p>To do ollama setup use <a target="_blank"
+        href="https://chromewebstore.google.com/detail/opentalkgpt/idknomikbgopkhpepapoehhoafacddlk">OpenTalkGPT</a> Chrome Extention.
+    </p>
       <p>For any issue please check the solution <a target="_blank"
           href="https://github.com/ollama/ollama/blob/main/docs/faq.md">here</a>
       </p>
@@ -178,7 +189,7 @@
   <!-- owner detail end -->
 
   <div class="container" id="chatDiv">
-
+    <p id="successMessage" class="text-success mt-2 blinking-text"><strong>Click anywhere to copy the answer!</strong></p>
     <h3 class="mt-4">Selected Text</h3>
     <div id="selectedText" class="d-flex justify-content-start">No text selected</div>
 

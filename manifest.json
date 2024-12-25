@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "TextLLaMA",
-  "version": "1.0.0",
-  "description": "This extension simplifies your communication by providing clear word explanations, composing professional emails, checking grammar, and translating into multiple languages effortlessly.",
+  "version": "1.1.0",
+  "description": "Simplifies communication with word explanations, email composition, grammar check, and multi-language translation.",
   "permissions": [
     "contextMenus",
     "declarativeNetRequest",

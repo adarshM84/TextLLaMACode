@@ -1,17 +1,62 @@
 
-.chatDiv {
-    height: 70vh !important;
-    overflow-y: auto !important;
-    padding: 15px;
-    font-family: monospace !important;
-    scrollbar-width: none;
-    background: rgb(171 235 222 / 17%);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(9.5px);
-    -webkit-backdrop-filter: blur(9.5px);
-    border: 1px solid rgb(0 0 0 / 40%);
+#chatDiv {
+    cursor: pointer !important;
 }
+/* Base Style for .botResponseContent */
+.botResponseContent {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    position: relative; /* To position the animation */
+    cursor: pointer; /* Show pointer on hover */
+    transition: border-color 0.6s ease, box-shadow 0.6s ease, green 0.6s ease; /* Smooth animations */
+}
+
+/* Animation for border on click */
+.botResponseContent:active {
+    border-color: #4caf50; /* Green border for success */
+    box-shadow: 0 3px 6px rgba(76, 175, 80, 0.5); /* Green glow */
+    background: #c4fec9 !important; /* Change background to a light green when clicked */
+}
+
+/* Copy success message */
+.botResponseContent::after {
+    content: "Copied!";
+    position: absolute;
+    top: -30px; /* Position above the div */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%) translateY(0); /* Adjust centering */
+    background: #4caf50 !important; /* Green background */
+    color: #ffffff; /* White text */
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for the message */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth fade-in */
+}
+
+/* Show message on click */
+.botResponseContent:active::after {
+    opacity: 1; /* Show message */
+    transform: translateX(-50%) translateY(-10px); /* Slide slightly upwards */
+}
+
+/* Change color of div when message is shown */
+.botResponseContent.copy-active {
+    background: #e8f5e9 !important; /* Light green background when copied */
+    border-color: #4caf50; /* Green border when copied */
+    box-shadow: 0 3px 6px rgba(76, 175, 80, 0.5); /* Green glow */
+}
+
+/* For better handling of the "copied" state (added via JS) */
+.botResponseContent.copy-active:active {
+    background: #c8e6c9 !important; /* Lighter green when clicked after copied */
+    border-color: #388e3c; /* Darker green border */
+}
+
 
 .customTextCss {
     text-shadow: 0 1px 0 #ccc,
@@ -85,30 +130,6 @@ textarea {
     border: 1px solid rgba(255, 94, 91, 0.4) !important;
 }
 
-.card-lightblue {
-    background: rgba(0, 51, 102, 0.25) !important;
-    border-radius: 16px !important;
-    box-shadow: rgba(0, 0, 0, 0.3) 16px 14px 12px -3px !important;
-    backdrop-filter: blur(9.5px) !important;
-    -webkit-backdrop-filter: blur(9.5px) !important;
-    border: 1px solid rgba(0, 51, 102, 0.4) !important;
-}
-
-.card-lightyellow {
-    background: rgba(255, 215, 0, 0.21) !important;
-    border-radius: 16px !important;
-    box-shadow: rgba(0, 0, 0, 0.3) 16px 14px 12px -3px !important;
-    backdrop-filter: blur(9.5px) !important;
-    -webkit-backdrop-filter: blur(9.5px) !important;
-    border: 1px solid rgba(255, 215, 0, 0.4) !important;
-}
-
-.card-body {
-    padding: 12px 6px !important;
-    overflow-y: scroll !important;
-    scrollbar-width: none !important;
-}
-
 .card-header {
     text-wrap: nowrap !important;
 }
@@ -128,18 +149,9 @@ code {
 
 #headTitle {
     margin: 0px !important;
+    cursor: pointer !important;
 }
 
-.userQuery {
-    /* background: #10adc7; */
-    background: #D6E9FE !important;
-    border-top-left-radius: 10px;
-    padding: 10px 4px 10px 25px;
-    overflow: auto;
-    font-size: 20px;
-    font-weight: bold;
-    border: 2px black solid;
-}
 
 .botResponse {
     /* background: #a8e2e0; */

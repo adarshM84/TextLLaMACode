@@ -36,45 +36,8 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-track {
     background: #e0f7fa;
-}`},{name:"Retro Sunset Theme",value:`body {
-    background: linear-gradient(135deg, #fdf6e3, #ffcc80) !important;
-    font-family: 'Ubuntu', Arial, sans-serif !important;
-    color: #333333; /* Consistent text color */
-    scrollbar-width: thin;
-    min-height: 1000px;
-    width: 550px !important;
-}
-
-#selectedText {
-    margin-top: 10px;
-    padding: 10px;
-    background: #ffffff; /* Clean white */
-    border: 1px solid #ffcc80;
-    border-radius: 8px;
-    color: #333333; /* Consistent text color */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-#showAnswer {
-    margin-top: 10px;
-    padding: 10px;
-    background: #fdf6e3;
-    border: 1px solid #f57f17;
-    border-radius: 8px;
-    color: #333333; /* Consistent text color */
-    font-weight: bold;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-body::-webkit-scrollbar-thumb {
-    background: #f57f17; /* Amber scrollbar */
-    border-radius: 10px;
-}
-
-body::-webkit-scrollbar-track {
-    background: #fdf6e3;
 }`},
-{name:"Galactic Glow Theme",value:`body {
+{name:"Dark Theme",value:`body {
     background: #282c34 !important; /* Dark slate background */
     font-family: 'Inter', Arial, sans-serif !important;
     color: #e8e8e8; /* Soft white text */
@@ -111,6 +74,44 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-track {
     background: #20232a; /* Matches deep slate */
+}`},
+{name:"Retro Sunset Theme",value:`body {
+    background: linear-gradient(135deg, #fdf6e3, #ffcc80) !important;
+    font-family: 'Ubuntu', Arial, sans-serif !important;
+    color: #333333; /* Consistent text color */
+    scrollbar-width: thin;
+    min-height: 1000px;
+    width: 550px !important;
+}
+
+#selectedText {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ffffff; /* Clean white */
+    border: 1px solid #ffcc80;
+    border-radius: 8px;
+    color: #333333; /* Consistent text color */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#showAnswer {
+    margin-top: 10px;
+    padding: 10px;
+    background: #fdf6e3;
+    border: 1px solid #f57f17;
+    border-radius: 8px;
+    color: #333333; /* Consistent text color */
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #f57f17; /* Amber scrollbar */
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #fdf6e3;
 }`},
 {name:"Forest Whisper Theme",value:`body {
     background: linear-gradient(135deg, #f3f4ed, #a7c957) !important;
@@ -188,44 +189,6 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
     background: #f5f0ff; /* Matches pale lavender */
 }`},
-{name:"Citrus Burst Theme",value:`body {
-    background: linear-gradient(135deg, #fff9e6, #ffd54f) !important;
-    font-family: 'Open Sans', Arial, sans-serif !important;
-    color: #333333; /* Consistent text color */
-    scrollbar-width: thin;
-    min-height: 1000px;
-    width: 550px !important;
-}
-
-#selectedText {
-    margin-top: 10px;
-    padding: 10px;
-    background: #ffffff; /* Clean white */
-    border: 1px solid #ff9800; /* Bright orange border */
-    border-radius: 8px;
-    color: #333333; /* Consistent text color */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-#showAnswer {
-    margin-top: 10px;
-    padding: 10px;
-    background: #fff9e6; /* Soft cream */
-    border: 1px solid #f57c00; /* Burnt orange */
-    border-radius: 8px;
-    color: #333333; /* Consistent text color */
-    font-weight: bold;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-body::-webkit-scrollbar-thumb {
-    background: #ff9800; /* Bright orange scrollbar */
-    border-radius: 10px;
-}
-
-body::-webkit-scrollbar-track {
-    background: #fff9e6; /* Matches soft cream */
-}`},
 {name:"Arctic Glow Theme",value:`body {
     background: linear-gradient(135deg, #e6f9ff, #b3e5fc) !important;
     font-family: 'Raleway', Arial, sans-serif !important;
@@ -302,10 +265,10 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
     background: #f9f5e3; /* Matches soft beige */
 }`},
-{name:"Aurora Twilight Theme",value:`body {
-    background: linear-gradient(135deg, #292a4d, #fdebbd) !important;
-    font-family: 'Montserrat', Arial, sans-serif !important;
-    color: #e5e5e5; /* Soft white text */
+{name:"Cyberpunk Neon Theme",value:`body {
+    background: linear-gradient(135deg, #1a1a1a, #333333) !important; /* Dark cyber background */
+    font-family: 'Courier New', Courier, monospace !important;
+    color: #e8e8e8; /* Light text */
     scrollbar-width: thin;
     min-height: 1000px;
     width: 550px !important;
@@ -314,30 +277,188 @@ body::-webkit-scrollbar-track {
 #selectedText {
     margin-top: 10px;
     padding: 10px;
-    background: #1d1f33; /* Deep indigo */
-    border: 1px solid #fcb045; /* Sunset orange */
+    background: #242424; /* Deep gray */
+    border: 1px solid #ff007f; /* Neon pink */
     border-radius: 8px;
-    color: #e5e5e5; /* Consistent text color */
-    box-shadow: 0 3px 6px rgba(255, 180, 70, 0.2);
+    color: #e8e8e8;
+    box-shadow: 0 3px 8px rgba(255, 0, 127, 0.5); /* Neon glow */
 }
 
 #showAnswer {
     margin-top: 10px;
     padding: 10px;
-    background: #fdebbd; /* Pale peach */
-    border: 1px solid #fa7268; /* Coral pink */
+    background: #262839; /* Dar Blu */
+    border: 1px solid #00e5ff; /* Neon cyan */
     border-radius: 8px;
-    color: #292a4d; /* Dark indigo text */
+    color: white; 
     font-weight: bold;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 8px rgba(0, 229, 255, 0.5); /* Cyan glow */
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #fcb045; /* Sunset orange scrollbar */
+    background: linear-gradient(135deg, #ff007f, #00e5ff); /* Neon gradient scrollbar */
     border-radius: 10px;
 }
 
 body::-webkit-scrollbar-track {
-    background: #1d1f33; /* Matches deep indigo */
-}`}
+    background: #1a1a1a; /* Matches dark background */
+}
+`}
+,{name:"Minimalist Pearl Theme",value:`body {
+    background: linear-gradient(135deg, #ffffff, #f7f7f7) !important;
+    font-family: 'Montserrat', Arial, sans-serif !important;
+    color: #555555; /* Soft gray text */
+    scrollbar-width: thin;
+    min-height: 1000px;
+    width: 550px !important;
+}
+
+#selectedText {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ffffff; /* Pure white */
+    border: 1px solid #dcdcdc; /* Light gray */
+    border-radius: 8px;
+    color: #555555;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+#showAnswer {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f0f0f0; /* Off-white */
+    border: 1px solid #bbbbbb; /* Light gray */
+    border-radius: 8px;
+    color: #333333; /* Darker text */
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #cccccc; /* Subtle gray scrollbar */
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f7f7f7; /* Matches soft gray background */
+}
+`},
+{name:"Galaxy Horizon Theme",value:`body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e) !important;
+    font-family: 'Roboto', Arial, sans-serif !important;
+    color: #ffffff; /* Starry white text */
+    scrollbar-width: thin;
+    min-height: 1000px;
+    width: 550px !important;
+}
+
+#selectedText {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(48, 43, 99, 0.8); /* Semi-transparent galaxy purple */
+    border: 1px solid #9575cd; /* Muted purple */
+    border-radius: 8px;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(149, 117, 205, 0.4); /* Nebula glow */
+}
+
+#showAnswer {
+    margin-top: 10px;
+    padding: 10px;
+    background: #9575cd; /* Nebula purple */
+    border: 1px solid #d1c4e9; /* Soft lavender */
+    border-radius: 8px;
+    color: white; /* Deep night */
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(209, 196, 233, 0.5); /* Lavender glow */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #9575cd, #d1c4e9); /* Galaxy gradient scrollbar */
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #0f0c29; /* Matches galaxy background */
+}
+`},
+{name:"Playful Candyland Theme",value:`body {
+    background: linear-gradient(135deg, #ffefd5, #ffb6c1, #ffa07a) !important; /* Candy-colored gradient */
+    font-family: 'Comic Sans MS', Arial, sans-serif !important;
+    color: #4a4a4a; /* Neutral gray text for readability */
+    scrollbar-width: thin;
+    min-height: 1000px;
+    width: 550px !important;
+}
+
+#selectedText {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ffffff; /* Clean white */
+    border: 2px solid #ffa07a; /* Peach border */
+    border-radius: 16px; /* Extra rounded corners */
+    color: #4a4a4a; /* Consistent text color */
+    box-shadow: 0 4px 8px rgba(255, 160, 122, 0.4); /* Peach glow */
+}
+
+#showAnswer {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ffb6c1; /* Light pink */
+    border: 2px solid #ffa07a; /* Peach */
+    border-radius: 16px; /* Rounded corners */
+    color: black; /* Neutral text color */
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(255, 182, 193, 0.5); /* Pink glow */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ffb6c1, #ffa07a); /* Candy-striped scrollbar */
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #ffefd5; /* Matches candy pastel background */
+}
+`},
+{name:"Superhero Adventures Theme",value:`body {
+    background: linear-gradient(135deg, #f0f4f8, #d1e8ff) !important; /* Soft blue gradient */
+    font-family: 'Arial', sans-serif !important;
+    color: #333333; /* Neutral gray text */
+    scrollbar-width: thin;
+    min-height: 1000px;
+    width: 550px !important;
+}
+
+#selectedText {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ffffff; /* Clean white */
+    border: 2px solid #4a90e2; /* Light blue border */
+    border-radius: 8px; /* Subtle rounded corners */
+    color: #333333; /* Neutral gray text */
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+#showAnswer {
+    margin-top: 10px;
+    padding: 10px;
+    background: #d1e8ff; /* Soft blue background */
+    border: 2px solid #4a90e2; /* Light blue border */
+    border-radius: 8px; /* Rounded corners */
+    color: #333333; /* Neutral text color */
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for consistency */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #4a90e2; /* Light blue scrollbar */
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f0f4f8; /* Matches soft blue background */
+}
+`}
 ];
