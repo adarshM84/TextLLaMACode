@@ -78,5 +78,5 @@ Transform your writing with TextLLaMA! 🚀
 ---
 
 For additional information and setup details, visit:  
-- [OpenTalkGPT Extension](https://chromewebstore.google.com/detail/opentalkgpt/idknomikbgopkhpepapoehhoafacddlk)  
-- [TextLLaMA GitHub Repository](https://github.com/adarshM84/TextLLaMA)  
+- [OpenTalkGPT Extension](https://chromewebstore.google.com/detail/opentalkgpt/idknomikbgopkhpepapoehhoafacddlk)
+- Download Link : <a href="https://chromewebstore.google.com/detail/textllama/phlhmokcogmcanhjhojccoockgkebiji" target="_blank">**TextLLaMA**</a>  
