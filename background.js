@@ -8,7 +8,7 @@ chrome.runtime.onInstalled.addListener(() => {
     { id: "askQuestion", title: "❓ Ask" },
     { id: "explainText", title: "📖 Explain the Text" },
     { id: "translateText", title: "🌐 Translate to" },
-    { id: "writeEmail", title: "📧 Write an Email" },
+    { id: "writeEmail", title: "📧 Write an Email For " },
     { id: "writeAutoResponse", title: "🤖 Write an Auto Response for Email" }
   ];
 
@@ -51,6 +51,22 @@ chrome.runtime.onInstalled.addListener(() => {
     });
   });
 
+  //Add submenu for mail compose
+  const mailRequest = [
+    { id: "leaveMail", title: "Leave Request." },
+    { id: "roomBookMail", title: "Meeting Room Book Request." },
+    { id: "givenSubjectMail", title: "Given Subject." },
+    { id: "descMail", title: "Given Details." }
+  ];
+
+  mailRequest.forEach((subject) => {
+    chrome.contextMenus.create({
+      id: subject.id,
+      title: subject.title,
+      parentId: "writeEmail", // Nest under the Translate menu
+      contexts: ["selection"]
+    });
+  });
 });
 
 // Listen for the context menu click
@@ -102,8 +118,17 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       case "translateToKorean":
         responseMessage = `Translation of of given text  to Korean : "${selectedText}"`;
         break;
-      case "writeEmail":
-        responseMessage = `Suggested email for "${selectedText}".`;
+      case "leaveMail":
+        responseMessage = `Wrire email for leave request.`;
+        break;
+      case "roomBookMail":
+        responseMessage = `Write email for metting room book request.`;
+        break;
+      case "givenSubjectMail":
+        responseMessage = `Write email for given subject : "${selectedText}".`;
+        break;
+      case "descMail":
+        responseMessage = `Write email for given details :"${selectedText}".`;
         break;
       case "writeAutoResponse":
         responseMessage = `Auto response for "${selectedText}":\nThank you for your message. We have received the following query:\n"${selectedText}"\nOur team will respond shortly.`;
