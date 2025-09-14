@@ -32,6 +32,7 @@ chrome.runtime.onInstalled.addListener(() => {
   const translateLanguages = [
     { id: "translateToHindi", title: "Hindi" },
     { id: "translateToEnglish", title: "English" },
+    { id: "translateToArabic", title: "Arabic" },
     { id: "translateToSpanish", title: "Spanish" },
     { id: "translateToFrench", title: "French" },
     { id: "translateToGerman", title: "German" },
@@ -90,6 +91,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         break;
       case "translateToEnglish":
         responseMessage = `Translation of given text to English : "${selectedText}" `;
+        break;
+      case "translateToArabic":
+        responseMessage = `Translation of given text to Arabic : "${selectedText}" `;
         break;
       case "translateToSpanish":
         responseMessage = `Translation of of given text  to Spanish :"${selectedText}"`;

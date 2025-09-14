@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "TextLLaMA",
-  "version": "1.1.1",
+  "name": "TextLLaMA - Your Personal Offline Grammar Fixer & Email Writer",
+  "version": "1.2",
   "description": "Simplifies communication with word explanations, email composition, grammar check, and multi-language translation.",
   "permissions": [
     "contextMenus",

@@ -32,11 +32,48 @@ function setHostAddress(hostName) {
     else if (hostName.length > 0) rebuildRules("localhost");;
 }
 
+function openMailClient(client) {
+    const to = "";
+    const subject = "";
+    const body = document.getElementById("showAnswer").textContent.trim();
+
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
+
+    let url = "";
+
+    if (client === "gmail") {
+        url = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${encodedSubject}&body=${encodedBody}`;
+    } else if (client === "outlook") {
+        url = `https://outlook.office.com/mail/deeplink/compose?to=${to}&subject=${encodedSubject}&body=${encodedBody}`;
+    }
+
+    if (url) {
+        window.open(url, '_blank');
+    }
+}
+
+
 window.onload = () => {
     initializeLocalStorageDefaults();
     setHostAddress(localStorage.getItem("hostAddress"));//To Do a post call for chat with ollama modals
     setModalSettingsList();
     setFunctionCallByClass("ollamaSettings", "change", setSettings);
+
+    document.getElementById("openGmail").addEventListener("click", function () {
+        openMailClient("gmail");
+    });
+
+    document.getElementById("openOutlook").addEventListener("click", function () {
+        openMailClient("outlook");
+    });
+
+    document.getElementById("stopChat").addEventListener("click", function () {
+        localStorage.setItem("stopChat", true);
+    });
+    document.getElementById("restartChat").addEventListener("click", function () {
+         getQuestionAnswer(document.getElementById("selectedText").textContent);
+    });
 
     document.getElementById("openSettingIcon").addEventListener("click", function (event) {
         showElement("chatDiv", !document.getElementById("ollamaSettings").hidden);
@@ -53,7 +90,7 @@ window.onload = () => {
     document.getElementById("headTitle").addEventListener("click", function (event) {
         showElement("ollamaSettings", false);
         showElement("chatDiv", true);
-        showElement("ownerDiv",false);
+        showElement("ownerDiv", false);
     });
 
     document.getElementById("chatDiv").addEventListener("click", function (event) {
@@ -69,7 +106,7 @@ window.onload = () => {
         window.close();
     });
 
-    if(localStorage.getItem("chatTheme"))  document.getElementById("coustomStyle").innerHTML = localStorage.getItem("chatTheme");
+    if (localStorage.getItem("chatTheme")) document.getElementById("coustomStyle").innerHTML = localStorage.getItem("chatTheme");
 
 }
 
@@ -131,17 +168,25 @@ function setDefault(key, defaultValue, setForce = false) {
     }
 }
 
+//To Stop The Chat
+function stpoChat(flag) {
+    localStorage.setItem("stopChat", flag);
+    showElement("stopChat", !flag)
+    showElement("restartChat", flag)
+}
+
 //To Get Answer
 function getQuestionAnswer(useQuestion) {
-    botMessage="";
+    stpoChat(false);
+    botMessage = "";
     if (localStorage.getItem("ModalWorking") != 1) {
         alert("Not able to connect with ollama please check the settings.");
         return;
     }
 
-    if(!localStorage.getItem("ollamaModal") || localStorage.getItem("ollamaModal").trim().length==0){
+    if (!localStorage.getItem("ollamaModal") || localStorage.getItem("ollamaModal").trim().length == 0) {
         alert("Oops.Please select the modal or do the ollama setting from setting tab.");
-        document.getElementById("showAnswer").innerHTML="Oops.Please select the modal or do the ollama setting from setting tab.";
+        document.getElementById("showAnswer").innerHTML = "Oops.Please select the modal or do the ollama setting from setting tab.";
         return false;
     }
 
@@ -154,9 +199,11 @@ function getQuestionAnswer(useQuestion) {
         stream: true
     };
 
-    var apiUrl = "http://localhost:11434/api/generate";
+    const storedUrl = localStorage.getItem("modalConnectionUri");
+    const baseUrl = storedUrl && storedUrl.trim() !== "" ? storedUrl : "http://localhost:11434";
+    const apiUrl = `${baseUrl}/api/generate`;
 
-    fetch("http://localhost:11434/api/generate", {
+    fetch(apiUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -164,7 +211,7 @@ function getQuestionAnswer(useQuestion) {
         body: JSON.stringify(data)
     })
         .then(response => {
-            console.log("response")
+            console.log("response  -level 2")
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -176,6 +223,10 @@ function getQuestionAnswer(useQuestion) {
             // Define recursive function to continuously fetch responses
             function readStream() {
                 reader.read().then(({ done, value }) => {
+                    if (localStorage.getItem("stopChat") == 'true') {
+                        stpoChat(true);
+                        return;
+                    }
                     if (done) {
                         // Process any remaining buffer at the end of stream
                         if (buffer !== '') {
@@ -221,12 +272,13 @@ function getQuestionAnswer(useQuestion) {
                         document.getElementById("showAnswer").textContent = "";
                     }
                     jsonData.response = jsonData.response.replace(/"/g, '');
-                    botMessage+=jsonData.response;
+                    botMessage += jsonData.response;
                     document.getElementById("showAnswer").innerHTML = parseText(botMessage);
                     localStorage.setItem("oldAnswer", document.getElementById("showAnswer").innerHTML);
 
                     // Check if the response indicates "done: true"
                     if (jsonData.done) {
+                        stpoChat(true)
                         console.log("Done");
                     } else {
                         // Continue reading the stream
@@ -241,7 +293,7 @@ function getQuestionAnswer(useQuestion) {
             readStream();
         })
         .catch(error => {
-            document.getElementById("showAnswer").innerHTML="Opps!! not able to conect with ollama server.Please check settngs or ollama is runing or not.";
+            document.getElementById("showAnswer").innerHTML = "Opps!! not able to conect with ollama server.Please check settngs or ollama is runing or not.";
             alert("Opps!! not able to conect with ollama server.Please check settngs or ollama is runing or not.")
             console.error('There was a problem with the fetch operation:', error);
         });
